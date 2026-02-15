@@ -3,30 +3,30 @@ import ImageCarousel from "@/components/ImageCarousel";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 
+// Original site room images
 const cozyImages = [
-  "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&h=600&fit=crop",
-  "https://images.unsplash.com/photo-1590490360182-c33d3b62c3ec?w=800&h=600&fit=crop",
-  "https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=800&h=600&fit=crop",
+  "https://static.wixstatic.com/media/c837a6_4ea2357e82554663a1c84809cf16ac31~mv2.jpg/v1/fill/w_800,h_600,q_90,enc_avif,quality_auto/c837a6_4ea2357e82554663a1c84809cf16ac31~mv2.jpg",
+  "https://static.wixstatic.com/media/c837a6_f932e19d498a4909b64c6d2987916e28~mv2.jpg/v1/fill/w_800,h_600,q_90,enc_avif,quality_auto/c837a6_f932e19d498a4909b64c6d2987916e28~mv2.jpg",
 ];
 
 const suiteImages = [
-  "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=800&h=600&fit=crop",
-  "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=800&h=600&fit=crop",
-  "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&h=600&fit=crop",
+  "https://static.wixstatic.com/media/931f2d_714ed4d2cf824698837f17aea9eb9bca~mv2.jpg/v1/fill/w_800,h_800,q_90,enc_avif,quality_auto/931f2d_714ed4d2cf824698837f17aea9eb9bca~mv2.jpg",
+  "https://static.wixstatic.com/media/931f2d_54ba243d07d443ec9a35e6769c7c01c8~mv2.jpg/v1/fill/w_800,h_800,q_90,enc_avif,quality_auto/931f2d_54ba243d07d443ec9a35e6769c7c01c8~mv2.jpg",
+  "https://static.wixstatic.com/media/931f2d_ba25e964ca0d4139a260ab9ef630a364~mv2.jpg/v1/fill/w_800,h_800,q_90,enc_avif,quality_auto/931f2d_ba25e964ca0d4139a260ab9ef630a364~mv2.jpg",
 ];
 
 const penthouseImages = [
-  "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&h=600&fit=crop",
-  "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=600&fit=crop",
-  "https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=800&h=600&fit=crop",
+  "https://static.wixstatic.com/media/931f2d_b100034d55cf43edb9321f74a0bec8eb~mv2.jpg/v1/fill/w_800,h_800,q_90,enc_avif,quality_auto/931f2d_b100034d55cf43edb9321f74a0bec8eb~mv2.jpg",
+  "https://static.wixstatic.com/media/931f2d_3f0ddb22c73d4d0287e1a5e1635f9d3a~mv2.jpg/v1/fill/w_800,h_800,q_90,enc_avif,quality_auto/931f2d_3f0ddb22c73d4d0287e1a5e1635f9d3a~mv2.jpg",
+  "https://static.wixstatic.com/media/931f2d_1ed9b236be8f429ca8226a6801b92130~mv2.jpg/v1/fill/w_800,h_800,q_90,enc_avif,quality_auto/931f2d_1ed9b236be8f429ca8226a6801b92130~mv2.jpg",
 ];
 
 const rooms = [
   {
     name: "The Cozy Retreat",
     description:
-      "A warm and inviting space designed for ultimate relaxation. Wake up to ocean views, unwind on your private terrace, and enjoy the comforts of modern luxury in an intimate setting.",
-    features: ["Private Terrace", "Modern Bath", "Smart Entertainment", "Ocean View"],
+      "Step out to a sun-kissed terrace and let the view set the tone for your day. A warm and inviting space designed for ultimate relaxation with ocean views and modern luxury.",
+    features: ["Private Terrace", "Modern Bath", "Smart Entertainment", "Chic Comfort"],
     images: cozyImages,
   },
   {
@@ -60,7 +60,7 @@ const Rooms = () => {
           Stay Your Way
         </h1>
         <p className="text-lg font-sans text-accent-foreground/80 max-w-2xl mx-auto">
-          Every room is designed to offer a unique blend of comfort, style, and unforgettable views.
+          Immerse Yourself in Luxury & Memorable Moments
         </p>
       </section>
 
@@ -70,11 +70,7 @@ const Rooms = () => {
           key={room.name}
           className={`py-20 px-6 ${i % 2 === 1 ? "bg-secondary/30" : ""}`}
         >
-          <div
-            className={`max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center ${
-              i % 2 === 1 ? "md:direction-rtl" : ""
-            }`}
-          >
+          <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div className={i % 2 === 1 ? "md:order-2" : ""}>
               <h2 className="text-3xl md:text-4xl font-serif mb-4">{room.name}</h2>
               <p className="font-sans text-muted-foreground leading-relaxed mb-6">

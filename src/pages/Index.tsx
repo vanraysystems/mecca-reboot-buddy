@@ -1,36 +1,39 @@
 import Layout from "@/components/Layout";
 import BookingForm from "@/components/BookingForm";
-import ImageCarousel from "@/components/ImageCarousel";
 import { Button } from "@/components/ui/button";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
-const heroImage = "https://static.wixstatic.com/media/5b2137_7d1c5d3e8e6a4e8e9c3f3b8e5a7c9d2f~mv2.jpg/v1/fill/w_1920,h_1080,al_c,q_85/cabo-arch.jpg";
-const villaInterior = "https://static.wixstatic.com/media/5b2137_villa_interior.jpg/v1/fill/w_800,h_600,al_c,q_80/villa.jpg";
-
-// Using high-quality Cabo/villa placeholder images
-const HERO_IMG = "https://images.unsplash.com/photo-1512100356356-de1b84283e18?w=1920&h=1080&fit=crop";
-const VILLA_IMG = "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=600&fit=crop";
-const SLEEP_IMG = "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=1920&h=800&fit=crop";
-const POOL_IMG = "https://images.unsplash.com/photo-1572331165267-854da2b021b1?w=600&h=400&fit=crop";
-const DOWNTOWN_IMG = "https://images.unsplash.com/photo-1518105779142-d975f22f1b0a?w=600&h=400&fit=crop";
-const BEACH_IMG = "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&h=400&fit=crop";
-const CHEF_IMG = "https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=600&h=400&fit=crop";
+// Original site images
+const HERO_IMG = "https://static.wixstatic.com/media/nsplsh_324c68434476535f377873~mv2_d_2909_3636_s_4_2.jpg/v1/fill/w_1920,h_1080,fp_0.50_0.45,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Image%20by%20Christopher%20Kuzman.jpg";
+const VILLA_IMG = "https://static.wixstatic.com/media/931f2d_f1a0e72f5299474086741cd4aa31732c~mv2.jpg/v1/fill/w_781,h_743,fp_0.45_0.50,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/02BB5CD5-65A9-44D5-8B50-DC13EFD08CAF_JPG.jpg";
+const SLEEP_IMG = "https://static.wixstatic.com/media/931f2d_9dfd5ba140c044f68a0e69e9c6b28b27f001.jpg/v1/fill/w_1920,h_900,al_c,q_85,usm_0.33_1.00_0.00,enc_avif,quality_auto/931f2d_9dfd5ba140c044f68a0e69e9c6b28b27f001.jpg";
+const UPSTAIRS_IMG = "https://static.wixstatic.com/media/931f2d_fdfb2b93a25844ee8fc314d1d70bb775~mv2.jpg/v1/fill/w_781,h_743,fp_0.41_0.46,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Upstairs_Living.jpg";
+const POOL_IMG = "https://static.wixstatic.com/media/931f2d_9a8945107e9746f7a52781200121c8dd~mv2.jpg/v1/fill/w_600,h_400,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/91F89BB8-0C97-488E-9A9C-D459A58D6FA7_JPG.jpg";
+const DOWNTOWN_IMG = "https://static.wixstatic.com/media/931f2d_40de7a1625a34656a4f59895ea28ee79~mv2.jpg/v1/fill/w_600,h_415,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/guide-to-cabo-san-lucas-1.jpg";
+const BEACH_IMG = "https://static.wixstatic.com/media/nsplsh_786172684e704c5348546b~mv2_d_5472_3648_s_4_2.jpg/v1/fill/w_600,h_400,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/Image%20by%20Elizeu%20Dias.jpg";
+const CHEF_IMG = "https://static.wixstatic.com/media/nsplsh_6245774a44745047754b55~mv2_d_6000_4000_s_4_2.jpg/v1/fill/w_600,h_400,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/Image%20by%20Elle%20Cosgrave.jpg";
 
 const galleryImages = [
-  "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&h=400&fit=crop",
-  "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&h=400&fit=crop",
-  "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&h=400&fit=crop",
-  "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=600&h=400&fit=crop",
-  "https://images.unsplash.com/photo-1600573472591-ee6b68d14c68?w=600&h=400&fit=crop",
-  "https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=600&h=400&fit=crop",
+  "https://static.wixstatic.com/media/931f2d_5387c2171e34403caf30dbc99954b3b8~mv2.jpg/v1/fill/w_600,h_450,q_90,enc_avif,quality_auto/931f2d_5387c2171e34403caf30dbc99954b3b8~mv2.jpg",
+  "https://static.wixstatic.com/media/931f2d_1e4b229c28504357874282d6a40b1273~mv2.jpg/v1/fill/w_600,h_450,q_90,enc_avif,quality_auto/931f2d_1e4b229c28504357874282d6a40b1273~mv2.jpg",
+  "https://static.wixstatic.com/media/931f2d_9f8deb692d234f49b7f3ab5dec387482~mv2.jpg/v1/fill/w_600,h_450,q_90,enc_avif,quality_auto/931f2d_9f8deb692d234f49b7f3ab5dec387482~mv2.jpg",
+  "https://static.wixstatic.com/media/931f2d_05120fbe0d194548a1908164413edce3~mv2.jpg/v1/fill/w_600,h_450,q_90,enc_avif,quality_auto/931f2d_05120fbe0d194548a1908164413edce3~mv2.jpg",
+  "https://static.wixstatic.com/media/931f2d_c690ab9da472485b8dcf82013e2d474b~mv2.jpg/v1/fill/w_600,h_450,q_90,enc_avif,quality_auto/931f2d_c690ab9da472485b8dcf82013e2d474b~mv2.jpg",
+  "https://static.wixstatic.com/media/931f2d_9ba2e736ee48419bac356a041ab655b3~mv2.jpg/v1/fill/w_600,h_450,q_90,enc_avif,quality_auto/931f2d_9ba2e736ee48419bac356a041ab655b3~mv2.jpg",
+  "https://static.wixstatic.com/media/931f2d_048480f59d7a4993b6ed59aec1db0d49~mv2.jpg/v1/fill/w_600,h_450,q_90,enc_avif,quality_auto/931f2d_048480f59d7a4993b6ed59aec1db0d49~mv2.jpg",
+  "https://static.wixstatic.com/media/931f2d_99fb786e3c174b7697f8b9eb5068ddf1~mv2.jpg/v1/fill/w_600,h_450,q_90,enc_avif,quality_auto/931f2d_99fb786e3c174b7697f8b9eb5068ddf1~mv2.jpg",
+  "https://static.wixstatic.com/media/931f2d_6a57502bb14942aea8b805d59f90f1a6~mv2.jpg/v1/fill/w_600,h_450,q_90,enc_avif,quality_auto/931f2d_6a57502bb14942aea8b805d59f90f1a6~mv2.jpg",
+  "https://static.wixstatic.com/media/931f2d_bbf80f90d1344cf68c1ee10ab0f9cdad~mv2.jpg/v1/fill/w_600,h_450,q_90,enc_avif,quality_auto/931f2d_bbf80f90d1344cf68c1ee10ab0f9cdad~mv2.jpg",
+  "https://static.wixstatic.com/media/931f2d_37d217e6cc684e908831aa4cf449a9b1~mv2.jpg/v1/fill/w_600,h_450,q_90,enc_avif,quality_auto/931f2d_37d217e6cc684e908831aa4cf449a9b1~mv2.jpg",
+  "https://static.wixstatic.com/media/931f2d_b769779de8774850bf3a8889c715ea05~mv2.jpg/v1/fill/w_600,h_450,q_90,enc_avif,quality_auto/931f2d_b769779de8774850bf3a8889c715ea05~mv2.jpg",
 ];
 
 const features = [
-  { title: "Poolside Escape", desc: "Relax by our infinity pool with stunning ocean views.", img: POOL_IMG },
-  { title: "Close to Downtown", desc: "Just minutes from Cabo's vibrant nightlife and dining.", img: DOWNTOWN_IMG },
-  { title: "Private Beach", desc: "Exclusive beach access for an unforgettable retreat.", img: BEACH_IMG },
-  { title: "Private Chef", desc: "Savor gourmet meals crafted by our in-house chef.", img: CHEF_IMG },
+  { title: "Poolside Escape", desc: "Take a refreshing dip in our pool while enjoying the views and sunshine.", img: POOL_IMG },
+  { title: "Close to Downtown", desc: "Stay close to the heart of Cabo with just an 11-minute trip to downtown's vibrant scene.", img: DOWNTOWN_IMG },
+  { title: "Private Beach", desc: "Enjoy a scenic, walkable path to the beach within our community.", img: BEACH_IMG },
+  { title: "Private Chef", desc: "Savor gourmet meals prepared by our expert in-house chef, just for you.", img: CHEF_IMG },
 ];
 
 const Index = () => {
@@ -82,14 +85,8 @@ const Index = () => {
             <h2 className="text-3xl md:text-4xl font-serif mb-6">
               Unwind in the Heart of Cabo
             </h2>
-            <p className="font-sans text-muted-foreground leading-relaxed mb-4">
-              Nestled along the stunning coastline of Los Cabos, our exclusive villa offers an unparalleled retreat. 
-              With breathtaking ocean views, world-class amenities, and personalized service, every moment is designed 
-              to make you feel at home — only better.
-            </p>
             <p className="font-sans text-muted-foreground leading-relaxed mb-8">
-              Whether you're seeking adventure or tranquility, our villa is the perfect base for your Cabo escape. 
-              From sunrise yoga on the terrace to sunset cocktails by the infinity pool, let us curate your dream vacation.
+              Escape to a luxurious getaway where comfort and style come together. Whether you're unwinding or seeking adventure, our thoughtfully designed spaces provide the perfect home base. Enjoy breathtaking surroundings, a pool, and a jacuzzi, and have an unforgettable stay in the heart of Cabo.
             </p>
             <Button
               onClick={scrollToBooking}
@@ -101,7 +98,7 @@ const Index = () => {
           <div className="rounded-2xl overflow-hidden shadow-xl">
             <img
               src={VILLA_IMG}
-              alt="Luxury villa interior in Cabo San Lucas"
+              alt="Mecca Destinations villa interior"
               className="w-full h-[400px] object-cover"
               loading="lazy"
             />
@@ -122,7 +119,7 @@ const Index = () => {
             Sleeping In or Staying Up Late
           </h2>
           <p className="text-lg font-sans font-light mb-8 opacity-90">
-            The choice is yours. Every detail of your stay is tailored to your rhythm.
+            Whether you're indulging in lazy mornings wrapped in luxury or embracing the city's vibrant nightlife, your stay should be nothing short of exceptional.
           </p>
           <Button
             onClick={scrollToBooking}
