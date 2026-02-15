@@ -3,6 +3,7 @@ import BookingForm from "@/components/BookingForm";
 import { Button } from "@/components/ui/button";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import mec1Image from "@/assets/mec1.avif";
 
 // Original site images
 const HERO_IMG = "https://static.wixstatic.com/media/nsplsh_324c68434476535f377873~mv2_d_2909_3636_s_4_2.jpg/v1/fill/w_1920,h_1080,fp_0.50_0.45,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Image%20by%20Christopher%20Kuzman.jpg";
@@ -76,6 +77,14 @@ const Index = () => {
             Book Your Stay
           </Button>
         </div>
+      </section>
+      {/* Full-width Villa Showcase */}
+      <section className="w-full">
+        <img
+          src={mec1Image}
+          alt="Mecca Destinations villa showcase"
+          className="w-full h-auto object-cover"
+        />
       </section>
 
       {/* Unwind Section */}
