@@ -3,6 +3,7 @@ import BookingForm from "@/components/BookingForm";
 import { Button } from "@/components/ui/button";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { ScrollReveal } from "@/hooks/use-scroll-reveal";
 import mec1Image from "@/assets/mec1.avif";
 
 // Original site images
@@ -28,6 +29,15 @@ const galleryImages = [
   "https://static.wixstatic.com/media/931f2d_bbf80f90d1344cf68c1ee10ab0f9cdad~mv2.jpg/v1/fill/w_600,h_450,q_90,enc_avif,quality_auto/931f2d_bbf80f90d1344cf68c1ee10ab0f9cdad~mv2.jpg",
   "https://static.wixstatic.com/media/931f2d_37d217e6cc684e908831aa4cf449a9b1~mv2.jpg/v1/fill/w_600,h_450,q_90,enc_avif,quality_auto/931f2d_37d217e6cc684e908831aa4cf449a9b1~mv2.jpg",
   "https://static.wixstatic.com/media/931f2d_b769779de8774850bf3a8889c715ea05~mv2.jpg/v1/fill/w_600,h_450,q_90,enc_avif,quality_auto/931f2d_b769779de8774850bf3a8889c715ea05~mv2.jpg",
+  "https://static.wixstatic.com/media/931f2d_632224364d4046a79e9fc1f522d00c6c~mv2.jpg/v1/fill/w_600,h_450,q_90,enc_avif,quality_auto/931f2d_632224364d4046a79e9fc1f522d00c6c~mv2.jpg",
+  "https://static.wixstatic.com/media/931f2d_9ae322872541435389eac4747bdb5650~mv2.jpg/v1/fill/w_600,h_450,q_90,enc_avif,quality_auto/931f2d_9ae322872541435389eac4747bdb5650~mv2.jpg",
+  "https://static.wixstatic.com/media/931f2d_bea6b753692141c7883e0e281938b60c~mv2.jpg/v1/fill/w_600,h_450,q_90,enc_avif,quality_auto/931f2d_bea6b753692141c7883e0e281938b60c~mv2.jpg",
+  "https://static.wixstatic.com/media/931f2d_0d7ceca078a74bb68b707aabeb7be7fb~mv2.jpg/v1/fill/w_600,h_450,q_90,enc_avif,quality_auto/931f2d_0d7ceca078a74bb68b707aabeb7be7fb~mv2.jpg",
+  "https://static.wixstatic.com/media/931f2d_45a6ffc51ebc4839a2da524cb73a8ff2~mv2.jpg/v1/fill/w_600,h_450,q_90,enc_avif,quality_auto/931f2d_45a6ffc51ebc4839a2da524cb73a8ff2~mv2.jpg",
+  "https://static.wixstatic.com/media/931f2d_218b3d959cda416aaccc3cac64cd7525~mv2.jpg/v1/fill/w_600,h_450,q_90,enc_avif,quality_auto/931f2d_218b3d959cda416aaccc3cac64cd7525~mv2.jpg",
+  "https://static.wixstatic.com/media/931f2d_b8a8543a97b34dddab12022c215ce469~mv2.jpg/v1/fill/w_600,h_450,q_90,enc_avif,quality_auto/931f2d_b8a8543a97b34dddab12022c215ce469~mv2.jpg",
+  "https://static.wixstatic.com/media/931f2d_1ed9b236be8f429ca8226a6801b92130~mv2.jpg/v1/fill/w_600,h_450,q_90,enc_avif,quality_auto/931f2d_1ed9b236be8f429ca8226a6801b92130~mv2.jpg",
+  "https://static.wixstatic.com/media/931f2d_6ec94f011d8747cea00ee68b57592599~mv2.jpg/v1/fill/w_600,h_450,q_90,enc_avif,quality_auto/931f2d_6ec94f011d8747cea00ee68b57592599~mv2.jpg",
 ];
 
 const features = [
@@ -78,6 +88,7 @@ const Index = () => {
           </Button>
         </div>
       </section>
+
       {/* Full-width Villa Showcase */}
       <section className="w-full">
         <img
@@ -90,7 +101,7 @@ const Index = () => {
       {/* Unwind Section */}
       <section className="py-20 px-6">
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          <div>
+          <ScrollReveal>
             <h2 className="text-3xl md:text-4xl font-serif mb-6">
               Unwind in the Heart of Cabo
             </h2>
@@ -103,15 +114,43 @@ const Index = () => {
             >
               Book Your Stay
             </Button>
-          </div>
-          <div className="rounded-2xl overflow-hidden shadow-xl">
-            <img
-              src={VILLA_IMG}
-              alt="Mecca Destinations villa interior"
-              className="w-full h-[400px] object-cover"
-              loading="lazy"
-            />
-          </div>
+          </ScrollReveal>
+          <ScrollReveal delay={0.2}>
+            <div className="rounded-2xl overflow-hidden shadow-xl">
+              <img
+                src={VILLA_IMG}
+                alt="Mecca Destinations villa interior"
+                className="w-full h-[400px] object-cover"
+                loading="lazy"
+              />
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* Two-image section matching original site */}
+      <section className="px-6 pb-10">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
+          <ScrollReveal>
+            <div className="rounded-2xl overflow-hidden shadow-xl">
+              <img
+                src={SLEEP_IMG}
+                alt="Villa bedroom"
+                className="w-full h-[400px] object-cover"
+                loading="lazy"
+              />
+            </div>
+          </ScrollReveal>
+          <ScrollReveal delay={0.15}>
+            <div className="rounded-2xl overflow-hidden shadow-xl">
+              <img
+                src={UPSTAIRS_IMG}
+                alt="Upstairs living area"
+                className="w-full h-[400px] object-cover"
+                loading="lazy"
+              />
+            </div>
+          </ScrollReveal>
         </div>
       </section>
 
@@ -124,42 +163,48 @@ const Index = () => {
           <div className="absolute inset-0 bg-foreground/40" />
         </div>
         <div className="relative z-10 text-center text-background px-6 max-w-3xl">
-          <h2 className="text-3xl md:text-5xl font-serif font-bold mb-4">
-            Sleeping In or Staying Up Late
-          </h2>
-          <p className="text-lg font-sans font-light mb-8 opacity-90">
-            Whether you're indulging in lazy mornings wrapped in luxury or embracing the city's vibrant nightlife, your stay should be nothing short of exceptional.
-          </p>
-          <Button
-            onClick={scrollToBooking}
-            variant="outline"
-            className="rounded-full border-background text-background bg-transparent hover:bg-background hover:text-foreground font-sans uppercase tracking-wider px-8"
-          >
-            Book Your Stay
-          </Button>
+          <ScrollReveal>
+            <h2 className="text-3xl md:text-5xl font-serif font-bold mb-4">
+              Sleeping In or Staying Up Late
+            </h2>
+            <p className="text-lg font-sans font-light mb-8 opacity-90">
+              Whether you're indulging in lazy mornings wrapped in luxury or embracing the city's vibrant nightlife, your stay should be nothing short of exceptional.
+            </p>
+            <Button
+              onClick={scrollToBooking}
+              variant="outline"
+              className="rounded-full border-background text-background bg-transparent hover:bg-background hover:text-foreground font-sans uppercase tracking-wider px-8"
+            >
+              Book Your Stay
+            </Button>
+          </ScrollReveal>
         </div>
       </section>
 
       {/* Features Grid */}
       <section className="py-20 px-6">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-serif text-center mb-12">
-            Indulge in Elevated Comfort
-          </h2>
+          <ScrollReveal>
+            <h2 className="text-3xl md:text-4xl font-serif text-center mb-12">
+              Indulge in Elevated Comfort
+            </h2>
+          </ScrollReveal>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {features.map((f) => (
-              <div key={f.title} className="group">
-                <div className="rounded-2xl overflow-hidden mb-4 shadow-md">
-                  <img
-                    src={f.img}
-                    alt={f.title}
-                    className="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-500"
-                    loading="lazy"
-                  />
+            {features.map((f, i) => (
+              <ScrollReveal key={f.title} delay={i * 0.1}>
+                <div className="group">
+                  <div className="rounded-2xl overflow-hidden mb-4 shadow-md">
+                    <img
+                      src={f.img}
+                      alt={f.title}
+                      className="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-500"
+                      loading="lazy"
+                    />
+                  </div>
+                  <h3 className="text-lg font-serif font-semibold mb-1">{f.title}</h3>
+                  <p className="text-sm font-sans text-muted-foreground">{f.desc}</p>
                 </div>
-                <h3 className="text-lg font-serif font-semibold mb-1">{f.title}</h3>
-                <p className="text-sm font-sans text-muted-foreground">{f.desc}</p>
-              </div>
+              </ScrollReveal>
             ))}
           </div>
         </div>
@@ -168,24 +213,30 @@ const Index = () => {
       {/* Photo Gallery */}
       <section className="py-20 px-6 bg-secondary/30">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-serif text-center mb-12">Gallery</h2>
+          <ScrollReveal>
+            <h2 className="text-3xl md:text-4xl font-serif text-center mb-12">Gallery</h2>
+          </ScrollReveal>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
             {galleryImages.map((img, i) => (
-              <div key={i} className="rounded-2xl overflow-hidden shadow-md aspect-[4/3]">
-                <img
-                  src={img}
-                  alt={`Villa gallery photo ${i + 1}`}
-                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-                  loading="lazy"
-                />
-              </div>
+              <ScrollReveal key={i} delay={i * 0.05}>
+                <div className="rounded-2xl overflow-hidden shadow-md aspect-[4/3]">
+                  <img
+                    src={img}
+                    alt={`Villa gallery photo ${i + 1}`}
+                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                    loading="lazy"
+                  />
+                </div>
+              </ScrollReveal>
             ))}
           </div>
         </div>
       </section>
 
       {/* Booking Form */}
-      <BookingForm />
+      <ScrollReveal>
+        <BookingForm />
+      </ScrollReveal>
     </Layout>
   );
 };
