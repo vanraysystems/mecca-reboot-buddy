@@ -2,9 +2,9 @@ import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 
-const DINING_HERO = "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1920&h=800&fit=crop";
-const CHEF_IMG = "https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=800&h=600&fit=crop";
-const TABLE_IMG = "https://images.unsplash.com/photo-1550966871-3ed3cdb51f3a?w=800&h=600&fit=crop";
+const CHEF_IMG = "https://static.wixstatic.com/media/nsplsh_6245774a44745047754b55~mv2_d_6000_4000_s_4_2.jpg/v1/fill/w_800,h_600,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/Image%20by%20Elle%20Cosgrave.jpg";
+const DINING_HERO = "https://static.wixstatic.com/media/931f2d_9dfd5ba140c044f68a0e69e9c6b28b27f001.jpg/v1/fill/w_1920,h_900,al_c,q_85,usm_0.33_1.00_0.00,enc_avif,quality_auto/931f2d_9dfd5ba140c044f68a0e69e9c6b28b27f001.jpg";
+const TABLE_IMG = "https://static.wixstatic.com/media/931f2d_fdfb2b93a25844ee8fc314d1d70bb775~mv2.jpg/v1/fill/w_800,h_600,fp_0.41_0.46,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Upstairs_Living.jpg";
 
 const menuHighlights = [
   {
@@ -106,7 +106,7 @@ const Dining = () => {
           <div className="rounded-2xl overflow-hidden shadow-xl md:order-1">
             <img
               src={TABLE_IMG}
-              alt="Elegant dining table setup"
+              alt="Elegant living and dining space"
               className="w-full h-[400px] object-cover"
               loading="lazy"
             />
