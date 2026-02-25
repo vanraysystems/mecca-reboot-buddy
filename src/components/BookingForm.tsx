@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -12,6 +12,7 @@ import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { cn } from "@/lib/utils";
+import { supabase } from "@/integrations/supabase/client";
 
 const bookingSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100),
@@ -25,6 +26,30 @@ type BookingFormData = z.infer<typeof bookingSchema>;
 const BookingForm = () => {
   const [checkIn, setCheckIn] = useState<Date>();
   const [checkOut, setCheckOut] = useState<Date>();
+  const [bookedDates, setBookedDates] = useState<Set<string>>(new Set());
+
+  useEffect(() => {
+    const fetchBookedDates = async () => {
+      try {
+        const { data, error } = await supabase.functions.invoke('get-booked-dates');
+        if (error) {
+          console.error('Error fetching booked dates:', error);
+          return;
+        }
+        if (data?.success && data.bookedDates) {
+          setBookedDates(new Set(data.bookedDates));
+        }
+      } catch (err) {
+        console.error('Error fetching booked dates:', err);
+      }
+    };
+    fetchBookedDates();
+  }, []);
+
+  const isDateBooked = (date: Date): boolean => {
+    const dateStr = date.toISOString().split('T')[0];
+    return bookedDates.has(dateStr);
+  };
 
   const form = useForm<BookingFormData>({
     resolver: zodResolver(bookingSchema),
@@ -103,7 +128,7 @@ const BookingForm = () => {
                       mode="single"
                       selected={checkIn}
                       onSelect={setCheckIn}
-                      disabled={(date) => date < new Date()}
+                      disabled={(date) => date < new Date() || isDateBooked(date)}
                       className="p-3 pointer-events-auto"
                     />
                   </PopoverContent>
@@ -128,7 +153,7 @@ const BookingForm = () => {
                       mode="single"
                       selected={checkOut}
                       onSelect={setCheckOut}
-                      disabled={(date) => date < (checkIn || new Date())}
+                      disabled={(date) => date < (checkIn || new Date()) || isDateBooked(date)}
                       className="p-3 pointer-events-auto"
                     />
                   </PopoverContent>
