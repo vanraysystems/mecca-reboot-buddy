@@ -2,7 +2,7 @@ import Layout from "@/components/Layout";
 import BookingForm from "@/components/BookingForm";
 import { Button } from "@/components/ui/button";
 import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import { ScrollReveal } from "@/hooks/use-scroll-reveal";
 import mec1Image from "@/assets/mec1.avif";
 
