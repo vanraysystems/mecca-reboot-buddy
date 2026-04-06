@@ -233,6 +233,22 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Concierge CTA Banner */}
+      <section className="py-12 px-6 bg-primary/5">
+        <div className="max-w-3xl mx-auto text-center space-y-4">
+          <ScrollReveal>
+            <h2 className="text-2xl md:text-3xl font-serif">Looking for our full concierge experience?</h2>
+            <p className="font-sans text-muted-foreground">Private chef, yacht charters, airport transfers, spa treatments & more — all arranged before you arrive.</p>
+            <Button
+              asChild
+              className="rounded-full bg-primary text-primary-foreground hover:bg-primary/90 font-sans uppercase tracking-wider px-8 py-6 text-base mt-4"
+            >
+              <Link to="/book">Explore Concierge Booking</Link>
+            </Button>
+          </ScrollReveal>
+        </div>
+      </section>
+
       {/* Booking Form */}
       <ScrollReveal>
         <BookingForm />

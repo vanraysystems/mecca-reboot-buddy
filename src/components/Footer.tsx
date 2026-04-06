@@ -23,15 +23,26 @@ const Footer = () => {
 
       {/* Bottom */}
       <div className="border-t border-primary-foreground/20 py-6 px-6">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-start justify-between gap-8">
           <Link to="/" className="text-2xl font-serif font-bold tracking-wider">
             M
           </Link>
-          <div className="flex gap-6 text-xs font-sans opacity-70">
-            <Link to="/" className="hover:opacity-100">Home</Link>
-            <Link to="/rooms" className="hover:opacity-100">Rooms</Link>
-            <Link to="/dining" className="hover:opacity-100">In-House Dining</Link>
+
+          <div className="flex gap-12 text-xs font-sans">
+            <div className="space-y-2">
+              <p className="uppercase tracking-wider opacity-50 mb-2">Navigate</p>
+              <Link to="/" className="block opacity-70 hover:opacity-100">Home</Link>
+              <Link to="/rooms" className="block opacity-70 hover:opacity-100">Rooms</Link>
+              <Link to="/dining" className="block opacity-70 hover:opacity-100">In-House Dining</Link>
+            </div>
+            <div className="space-y-2">
+              <p className="uppercase tracking-wider opacity-50 mb-2">Concierge</p>
+              <Link to="/book" className="block opacity-70 hover:opacity-100">Book Direct</Link>
+              <Link to="/intake" className="block opacity-70 hover:opacity-100">Guest Intake</Link>
+              <Link to="/order" className="block opacity-70 hover:opacity-100">In-Villa Orders</Link>
+            </div>
           </div>
+
           <p className="text-xs font-sans opacity-50">
             © {new Date().getFullYear()} Mecca Destinations. All rights reserved.
           </p>
