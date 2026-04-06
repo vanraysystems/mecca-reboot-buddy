@@ -16,61 +16,121 @@ export type Database = {
     Tables: {
       bookings: {
         Row: {
+          adults: number | null
+          airbnb_confirmation: string | null
+          airport_pickup: boolean | null
           approval_token: string | null
+          arrival_time: string | null
           check_in: string
           check_out: string
+          children: number | null
           created_at: string
           deposit_amount: number | null
+          dietary_notes: string | null
           email: string
+          estimated_total: number | null
+          final_total: number | null
+          first_name: string | null
+          gio_briefed_at: string | null
           guests: number
           id: string
+          last_name: string | null
           message: string | null
           name: string
+          occasion: string | null
+          paid_at: string | null
+          services_json: Json | null
+          source: string | null
+          special_requests: string | null
           status: string
           stripe_customer_id: string | null
+          stripe_invoice_id: string | null
           stripe_payment_intent_id: string | null
           stripe_payment_method_id: string | null
           stripe_setup_intent_id: string | null
           total_price: number | null
+          type: string
           updated_at: string
+          villa_area: string | null
+          whatsapp: string | null
         }
         Insert: {
+          adults?: number | null
+          airbnb_confirmation?: string | null
+          airport_pickup?: boolean | null
           approval_token?: string | null
+          arrival_time?: string | null
           check_in: string
           check_out: string
+          children?: number | null
           created_at?: string
           deposit_amount?: number | null
+          dietary_notes?: string | null
           email: string
+          estimated_total?: number | null
+          final_total?: number | null
+          first_name?: string | null
+          gio_briefed_at?: string | null
           guests: number
           id?: string
+          last_name?: string | null
           message?: string | null
           name: string
+          occasion?: string | null
+          paid_at?: string | null
+          services_json?: Json | null
+          source?: string | null
+          special_requests?: string | null
           status?: string
           stripe_customer_id?: string | null
+          stripe_invoice_id?: string | null
           stripe_payment_intent_id?: string | null
           stripe_payment_method_id?: string | null
           stripe_setup_intent_id?: string | null
           total_price?: number | null
+          type?: string
           updated_at?: string
+          villa_area?: string | null
+          whatsapp?: string | null
         }
         Update: {
+          adults?: number | null
+          airbnb_confirmation?: string | null
+          airport_pickup?: boolean | null
           approval_token?: string | null
+          arrival_time?: string | null
           check_in?: string
           check_out?: string
+          children?: number | null
           created_at?: string
           deposit_amount?: number | null
+          dietary_notes?: string | null
           email?: string
+          estimated_total?: number | null
+          final_total?: number | null
+          first_name?: string | null
+          gio_briefed_at?: string | null
           guests?: number
           id?: string
+          last_name?: string | null
           message?: string | null
           name?: string
+          occasion?: string | null
+          paid_at?: string | null
+          services_json?: Json | null
+          source?: string | null
+          special_requests?: string | null
           status?: string
           stripe_customer_id?: string | null
+          stripe_invoice_id?: string | null
           stripe_payment_intent_id?: string | null
           stripe_payment_method_id?: string | null
           stripe_setup_intent_id?: string | null
           total_price?: number | null
+          type?: string
           updated_at?: string
+          villa_area?: string | null
+          whatsapp?: string | null
         }
         Relationships: []
       }
