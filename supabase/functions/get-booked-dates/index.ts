@@ -6,67 +6,8 @@ const corsHeaders = {
 // In-memory cache
 let cachedResult: { blockedDates: string[]; pricing: Record<string, number> } | null = null;
 let cacheTime = 0;
-let guestyToken: { token: string; expiresAt: number } | null = null;
-
 const CACHE_TTL = 15 * 60 * 1000; // 15 minutes
 
-async function getGuestyToken(): Promise<string | null> {
-  const clientId = Deno.env.get("GUESTY_CLIENT_ID");
-  const clientSecret = Deno.env.get("GUESTY_CLIENT_SECRET");
-  if (!clientId || !clientSecret) return null;
-
-  if (guestyToken && Date.now() < guestyToken.expiresAt) return guestyToken.token;
-
-  const res = await fetch("https://open-api.guesty.com/oauth2/token", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ client_id: clientId, client_secret: clientSecret, grant_type: "client_credentials" }),
-  });
-
-  if (!res.ok) return null;
-  const data = await res.json();
-  guestyToken = { token: data.access_token, expiresAt: Date.now() + 23 * 60 * 60 * 1000 };
-  return guestyToken.token;
-}
-
-async function fetchGuesty(): Promise<{ blockedDates: string[]; pricing: Record<string, number> } | null> {
-  const listingId = Deno.env.get("GUESTY_LISTING_ID");
-  if (!listingId) return null;
-
-  const token = await getGuestyToken();
-  if (!token) return null;
-
-  const today = new Date();
-  const endDate = new Date(today);
-  endDate.setMonth(endDate.getMonth() + 6);
-
-  const startStr = today.toISOString().split("T")[0];
-  const endStr = endDate.toISOString().split("T")[0];
-
-  const res = await fetch(
-    `https://open-api.guesty.com/v1/availability-pricing/api/calendar-listings/${listingId}?startDate=${startStr}&endDate=${endStr}`,
-    { headers: { Authorization: `Bearer ${token}` } }
-  );
-
-  if (!res.ok) return null;
-  const data = await res.json();
-
-  const blockedDates: string[] = [];
-  const pricing: Record<string, number> = {};
-
-  if (data?.days) {
-    for (const day of data.days) {
-      const dateStr = day.date?.split("T")[0];
-      if (!dateStr) continue;
-      if (day.status !== "available") blockedDates.push(dateStr);
-      if (day.price) pricing[dateStr] = day.price;
-    }
-  }
-
-  return { blockedDates, pricing };
-}
-
-// Fallback: iCal parser
 function parseIcal(text: string): { start: string; end: string }[] {
   const events: { start: string; end: string }[] = [];
   const lines = text.replace(/\r\n /g, "").split(/\r?\n/);
@@ -87,12 +28,18 @@ function parseIcal(text: string): { start: string; end: string }[] {
   return events;
 }
 
-async function fetchIcal(): Promise<{ blockedDates: string[]; pricing: Record<string, number> } | null> {
+async function fetchIcal(): Promise<{ blockedDates: string[]; pricing: Record<string, number> }> {
   const icalUrl = Deno.env.get("AIRBNB_ICAL_URL");
-  if (!icalUrl) return null;
+  if (!icalUrl) {
+    console.error("AIRBNB_ICAL_URL not configured");
+    return { blockedDates: [], pricing: {} };
+  }
 
   const response = await fetch(icalUrl);
-  if (!response.ok) return null;
+  if (!response.ok) {
+    console.error("iCal fetch failed:", response.status);
+    return { blockedDates: [], pricing: {} };
+  }
 
   const text = await response.text();
   const events = parseIcal(text);
@@ -108,7 +55,8 @@ async function fetchIcal(): Promise<{ blockedDates: string[]; pricing: Record<st
     }
   }
 
-  return { blockedDates: bookedDates, pricing: {} };
+  console.log(`iCal sync: ${events.length} events → ${bookedDates.length} blocked dates`);
+  return { blockedDates, pricing: {} };
 }
 
 Deno.serve(async (req) => {
@@ -120,21 +68,17 @@ Deno.serve(async (req) => {
 
     if (!invalidate && cachedResult && Date.now() - cacheTime < CACHE_TTL) {
       return new Response(
-        JSON.stringify({ success: true, blockedDates: cachedResult.blockedDates, pricing: cachedResult.pricing }),
+        JSON.stringify({ success: true, bookedDates: cachedResult.blockedDates, blockedDates: cachedResult.blockedDates, pricing: cachedResult.pricing, cached: true }),
         { headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }
 
-    // Try Guesty first, fall back to iCal
-    let result = await fetchGuesty();
-    if (!result) result = await fetchIcal();
-    if (!result) result = { blockedDates: [], pricing: {} };
-
+    const result = await fetchIcal();
     cachedResult = result;
     cacheTime = Date.now();
 
     return new Response(
-      JSON.stringify({ success: true, blockedDates: result.blockedDates, pricing: result.pricing }),
+      JSON.stringify({ success: true, bookedDates: result.blockedDates, blockedDates: result.blockedDates, pricing: result.pricing, cached: false }),
       { headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );
   } catch (error) {
