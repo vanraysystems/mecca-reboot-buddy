@@ -56,7 +56,7 @@ async function fetchIcal(): Promise<{ blockedDates: string[]; pricing: Record<st
   }
 
   console.log(`iCal sync: ${events.length} events → ${bookedDates.length} blocked dates`);
-  return { blockedDates, pricing: {} };
+  return { blockedDates: bookedDates, pricing: {} };
 }
 
 Deno.serve(async (req) => {
